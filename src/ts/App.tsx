@@ -16,14 +16,27 @@ const purchaseListReducer: PurchaseListReducer = (purchaseList, action) => {
   switch (action.type) {
     case 'add':
       let hasItem = false;
-      const result = purchaseList.map((item) => {
-        if (item.product.id === action.data.product.id) {
+      const result = purchaseList.map((purchase) => {
+        if (purchase.product.id === action.data.product.id) {
           hasItem = true;
-          return {product: item.product, count: item.count + action.data.count};
+          return {
+            product: purchase.product,
+            count: purchase.count + action.data.count,
+          };
         }
-        return item;
+        return purchase;
       });
       return (hasItem) ? result : [...purchaseList, action.data];
+    case 'remove':
+      return purchaseList.map((purchase) => {
+        if (purchase.product.id === action.data.product.id) {
+          return {
+            product: purchase.product,
+            count: purchase.count - action.data.count,
+          };
+        }
+        return purchase;
+      }).filter((purchase) => purchase.count > 0);
     default:
       throw new Error();
   }
@@ -46,7 +59,11 @@ const App: React.FC = () => {
             path="/shopping"
             element={<Shopping purchaseListDispatch={purchaseListDispatch} />}
           />
-          <Route path="/cart" element={<Cart cartList={purchaseList} />} />
+          <Route path="/cart" element={
+            <Cart
+              purchaseList={purchaseList}
+              purchaseDispatch={purchaseListDispatch} />
+          } />
         </Routes>
       </Router>
     </div>

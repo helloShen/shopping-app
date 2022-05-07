@@ -1,17 +1,68 @@
-import React from 'react';
+import React, {ReactElement} from 'react';
 import {Product, Purchase} from './models';
+import {PurchaseListAction} from './App';
+import {CartCounter} from './Counter';
 
 interface CartProp {
-  cartList: Purchase[];
+  purchaseList: Purchase[];
+  purchaseDispatch: React.Dispatch<PurchaseListAction>;
 };
 
-const Cart: React.FC<CartProp> = ({cartList}) => {
+const Cart: React.FC<CartProp> = ({purchaseList, purchaseDispatch}) => {
+  function handleIncrement(id: number): void {
+    const product = purchaseList.find(
+        (purchase) => purchase.product.id === id)?.product as Product;
+    purchaseDispatch({type: 'add', data: {product: product, count: 1}});
+  }
+
+  function handleDecrement(id: number): void {
+    const product = purchaseList.find(
+        (purchase) => purchase.product.id === id)?.product as Product;
+    purchaseDispatch({type: 'remove', data: {product: product, count: 1}});
+  }
+
   return (
     <div className="cart">
       <h1>Cart</h1>
-      {cartList.map((purchase) => {
-        return JSON.stringify(purchase);
+      {purchaseList.map((purchase) => {
+        return (
+          <CartItem
+            key={purchase.product.id}
+            purchase={purchase}
+            handleIncrement={() => handleIncrement(purchase.product.id)}
+            handleDecrement={() => handleDecrement(purchase.product.id)}
+          />
+        );
       })}
+      <div className="totalPrice">
+        {purchaseList.reduce((total, purchase) => {
+          return total + purchase.product.price * purchase.count;
+        }, 0)}
+      </div>
+    </div>
+  );
+};
+
+interface CartItemProps {
+  purchase: Purchase;
+  handleIncrement: React.MouseEventHandler<HTMLButtonElement>;
+  handleDecrement: React.MouseEventHandler<HTMLButtonElement>;
+}
+
+function CartItem({
+  purchase,
+  handleIncrement,
+  handleDecrement,
+}: CartItemProps): ReactElement {
+  return (
+    <div className="cartItem">
+      <h3 className="cartItem__name">{purchase.product.name}</h3>
+      <span className="cartItem__price">{purchase.product.price}</span>
+      <CartCounter
+        count={purchase.count}
+        handleIncrement={handleIncrement}
+        handleDecrement={handleDecrement}
+      />
     </div>
   );
 };

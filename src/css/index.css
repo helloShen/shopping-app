@@ -38,8 +38,23 @@
 .btn {
   padding: .5rem 1rem;
   border: 1px solid black;
+  user-select: none;
+}
+
+.btn-decrement.disabled {
+  pointer-events: none;
+  opacity: .4;
 }
 
 .counter__count {
   margin: 0 .5rem;
+}
+
+.product__add {
+  user-select: none;
+}
+
+.product__add.disabled {
+  pointer-events: none;
+  opacity: .4;
 }
