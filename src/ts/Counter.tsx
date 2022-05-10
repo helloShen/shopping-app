@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {Button} from '@mui/material';
 
 interface CounterProps {
   count: number;
@@ -21,21 +22,25 @@ export const Counter: React.FC<CounterProps> =
     ((decrementDisabled)? ' disabled' : '');
   return (
     <div className="counter">
-      <button
+      <Button
+        variant="outlined"
+        size="small"
+        color="primary"
         className="btn btn-increment"
-        type="button"
         onClick={increment}
       >
         +
-      </button>
+      </Button>
       <span className="counter__count">{count}</span>
-      <button
+      <Button
+        variant="outlined"
+        size="small"
+        color="primary"
         className={decrementClasses}
-        type="button"
         onClick={decrement}
       >
         -
-      </button>
+      </Button>
     </div>
   );
 };
@@ -50,21 +55,21 @@ export const CartCounter: React.FC<CartCounterProps> =
 ({count, handleIncrement, handleDecrement}) => {
   return (
     <div className="counter">
-      <button
-        className="btn btn-increment"
-        type="button"
+      <Button
+        size="small"
+        variant="outlined"
         onClick={handleIncrement}
       >
-        +
-      </button>
+      +
+      </Button>
       <span className="counter__count">{count}</span>
-      <button
-        className="btn btn-decrement"
-        type="button"
+      <Button
+        size="small"
+        variant="outlined"
         onClick={handleDecrement}
       >
         -
-      </button>
+      </Button>
     </div>
   );
 };

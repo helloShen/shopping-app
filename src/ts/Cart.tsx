@@ -1,6 +1,6 @@
 import React, {ReactElement} from 'react';
-import {Product, Purchase} from './models';
-import {PurchaseListAction} from './App';
+import Product from './Product';
+import Purchase, {PurchaseListAction} from './Purchase';
 import {CartCounter} from './Counter';
 
 interface CartProp {
@@ -37,7 +37,7 @@ const Cart: React.FC<CartProp> = ({purchaseList, purchaseDispatch}) => {
       <div className="totalPrice">
         {purchaseList.reduce((total, purchase) => {
           return total + purchase.product.price * purchase.count;
-        }, 0)}
+        }, 0).toFixed(2)}
       </div>
     </div>
   );
@@ -56,7 +56,7 @@ function CartItem({
 }: CartItemProps): ReactElement {
   return (
     <div className="cartItem">
-      <h3 className="cartItem__name">{purchase.product.name}</h3>
+      <h3 className="cartItem__name">{purchase.product.title}</h3>
       <span className="cartItem__price">{purchase.product.price}</span>
       <CartCounter
         count={purchase.count}

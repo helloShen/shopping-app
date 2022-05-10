@@ -1,72 +1,78 @@
-import React, {ReactElement, useReducer, useState} from 'react';
+import React, {useReducer, useState, useEffect} from 'react';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import Nav from './Nav';
 import Home from './Home';
 import Shopping from './Shopping';
 import Cart from './Cart';
-import {Product, Purchase} from './models';
+import Product from './Product';
+import {purchaseListReducer} from './Purchase';
+import {ThemeProvider, createTheme} from '@mui/material/styles';
 
-export type PurchaseListAction =
-  {type: string, data: Purchase};
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#000000',
+    },
+  },
+});
 
-export type PurchaseListReducer =
-  (purchaseList: Purchase[], action: PurchaseListAction) => Purchase[];
-
-const purchaseListReducer: PurchaseListReducer = (purchaseList, action) => {
-  switch (action.type) {
-    case 'add':
-      let hasItem = false;
-      const result = purchaseList.map((purchase) => {
-        if (purchase.product.id === action.data.product.id) {
-          hasItem = true;
-          return {
-            product: purchase.product,
-            count: purchase.count + action.data.count,
-          };
-        }
-        return purchase;
-      });
-      return (hasItem) ? result : [...purchaseList, action.data];
-    case 'remove':
-      return purchaseList.map((purchase) => {
-        if (purchase.product.id === action.data.product.id) {
-          return {
-            product: purchase.product,
-            count: purchase.count - action.data.count,
-          };
-        }
-        return purchase;
-      }).filter((purchase) => purchase.count > 0);
-    default:
-      throw new Error();
-  }
+/**
+ * Cached data comes from fakestoreapi.
+ */
+const fetchProducts = async (): Promise<Product[]> => {
+  return await (await fetch('https://fakestoreapi.com/products')).json();
 };
 
 const App: React.FC = () => {
   const [purchaseList, purchaseListDispatch] =
     useReducer(purchaseListReducer, []);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+
+  async function getProducts() {
+    const fetchedProducts = await fetchProducts();
+    setProducts(fetchedProducts);
+  }
+
+  useEffect(() => {
+    if (products.length === 0) {
+      setLoading(true);
+      getProducts();
+    }
+  }, []);
+
+  useEffect(() => {
+    if (products.length > 0) setLoading(false);
+  }, [products]);
 
   return (
-    <div
-      className="app"
-    >
-      <Router>
-        <Nav />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/home" element={<Home />} />
-          <Route
-            path="/shopping"
-            element={<Shopping purchaseListDispatch={purchaseListDispatch} />}
-          />
-          <Route path="/cart" element={
-            <Cart
-              purchaseList={purchaseList}
-              purchaseDispatch={purchaseListDispatch} />
-          } />
-        </Routes>
-      </Router>
-    </div>
+    <ThemeProvider theme={theme}>
+      <div
+        className="app"
+      >
+        <Router>
+          <Nav />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/home" element={<Home />} />
+            <Route
+              path="/shopping"
+              element={
+                <Shopping
+                  products={products}
+                  purchaseListDispatch={purchaseListDispatch}
+                  loading={loading}
+                />}
+            />
+            <Route path="/cart" element={
+              <Cart
+                purchaseList={purchaseList}
+                purchaseDispatch={purchaseListDispatch} />
+            } />
+          </Routes>
+        </Router>
+      </div>
+    </ThemeProvider>
   );
 };
 

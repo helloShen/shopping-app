@@ -1,6 +1,7 @@
 @import url('./norm.css');
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;700&family=Roboto:wght@100;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;400;700&family=Roboto+Slab:wght@100;400;700&display=swap');
 
 :root {
 	--black: #24292d;
@@ -50,8 +51,99 @@
   margin: 0 .5rem;
 }
 
+.product {
+  height: 32rem;
+  min-width: 18rem;
+  display: grid;
+  grid-template-rows: 14rem 11rem 4rem 3rem;
+}
+
+.product__image {
+  padding: 0 1rem;
+  display: grid;
+  grid-template: 100% / 100%;
+  place-items: center;
+}
+
+.product__image > img {
+  max-width:100%;
+  max-height:100%;
+}
+
+.product__info {
+  display: grid;
+  grid-template-rows: auto auto; /* only show 4 lines, must be 4.6 */
+  align-content: start;
+  row-gap: .5rem;
+}
+
+.product__title {
+  max-height: 4rem;
+  overflow: scroll;
+  font-family: 'Roboto Slab', serif;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.product__description {
+  /* display: -webkit-box;
+  max-width: inherit;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden; */
+  max-height: 4.5rem;
+  font-family: 'Roboto', sans-serif;
+  overflow: scroll;
+  font-size: .8rem;
+  color: var(--light-gray);
+}
+
+.product__purchase {
+  user-select: none;
+  display: grid;
+  grid-template-columns: auto auto;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.product__price {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 1.75rem;
+  font-weight: 100;
+}
+
+.product__counter {
+  margin-right: 1rem;
+}
+
+.product__counter .btn {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.product__counter .counter__count {
+  font-family: 'Roboto Mono', monospace;
+}
+
+.MuiButton-root.btn-increment,
+.MuiButton-root.btn-decrement {
+  min-width: 3rem;
+}
+
 .product__add {
   user-select: none;
+}
+
+.product__add-textcontainer {
+  width: 100%;
+  display: grid;
+  justify-content: center;
+}
+
+.product__add-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.25rem;
 }
 
 .product__add.disabled {

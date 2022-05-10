@@ -40,5 +40,12 @@ npm install --save-dev @babel/preset-typescript
 # npm install --save-dev ts-loader
 npm install --save @types/node @types/react @types/react-dom @types/jest @types/react-router-dom
 
+### react-icons
+npm install react-icons --save
+
+### mui
+npm install @mui/material @emotion/react @emotion/styled
+npm install @mui/icons-material
+
 
 
