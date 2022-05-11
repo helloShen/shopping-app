@@ -39,7 +39,7 @@ const ProductCard: React.FC<ProductComponentProps> =
     ((disabled) ? ' disabled' : '');
 
   return (
-    <Grid item key={product.id} xs={12} sm={6} md={4}>
+    <Grid item key={product.id} xs={12} md={6} lg={4} xl={3}>
       <Card className="product">
         <div className="product__image">
           <img src={product.image} />
@@ -57,6 +57,7 @@ const ProductCard: React.FC<ProductComponentProps> =
             {'$' + product.price}
           </div>
           <div className="product__counter">
+            <div className="product__quantity">Quantity:</div>
             <Counter
               count={count}
               setCount={setCount}

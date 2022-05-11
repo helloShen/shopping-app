@@ -58,6 +58,7 @@ export const CartCounter: React.FC<CartCounterProps> =
       <Button
         size="small"
         variant="outlined"
+        className="btn btn-increment"
         onClick={handleIncrement}
       >
       +
@@ -66,6 +67,7 @@ export const CartCounter: React.FC<CartCounterProps> =
       <Button
         size="small"
         variant="outlined"
+        className="btn btn-decrement"
         onClick={handleDecrement}
       >
         -
