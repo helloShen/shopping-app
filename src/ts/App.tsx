@@ -12,7 +12,7 @@ import Footer from '../js/footer/footer';
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#000000',
+      main: '#5A0058',
     },
   },
 });
@@ -72,11 +72,11 @@ const App: React.FC = () => {
                 purchaseDispatch={purchaseListDispatch} />
             } />
           </Routes>
-          <Footer
-            sourceCode="https://github.com/helloShen/#"
-            githubLogo="black"
-          />
         </Router>
+        <Footer
+          sourceCode="https://github.com/helloShen/shopping-app"
+          githubLogo="black"
+        />
       </div>
     </ThemeProvider>
   );

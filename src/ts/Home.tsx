@@ -1,6 +1,7 @@
 import React from 'react';
 import {Card, CardActionArea} from '@mui/material';
 import {Link} from 'react-router-dom';
+import Footer from '../js/footer/footer';
 
 const Home: React.FC = ({}) => {
   return (
