@@ -51,13 +51,16 @@ const App: React.FC = () => {
       <div
         className="app"
       >
-        <Router>
+        <Router basename={`/${process.env.PUBLIC_URL}`}>
+        {/* <Router> */}
           <Nav purchaseList={purchaseList} />
           <Routes>
-            <Route path="/shopping-app/" element={<Home />} />
-            <Route path="/shopping-app/home" element={<Home />} />
+            <Route path="" element={<Home />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/index.html" element={<Home />} />
+            <Route path="/home" element={<Home />} />
             <Route
-              path="/shopping-app/shopping"
+              path="/shopping"
               element={
                 <Shopping
                   products={products}
@@ -65,7 +68,7 @@ const App: React.FC = () => {
                   loading={loading}
                 />}
             />
-            <Route path="/shopping-app/cart" element={
+            <Route path="/cart" element={
               <Cart
                 purchaseList={purchaseList}
                 purchaseDispatch={purchaseListDispatch} />
