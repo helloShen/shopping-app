@@ -56,9 +56,9 @@ const App: React.FC = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/shopping-app" element={<Home />} />
-            <Route path="/shopping-app/#/home" element={<Home />} />
+            <Route path="/shopping-app/home" element={<Home />} />
             <Route
-              path="/shopping-app/#/shopping"
+              path="/shopping-app/shopping"
               element={
                 <Shopping
                   products={products}
@@ -66,7 +66,7 @@ const App: React.FC = () => {
                   loading={loading}
                 />}
             />
-            <Route path="/shopping-app/#/cart" element={
+            <Route path="/shopping-app/cart" element={
               <Cart
                 purchaseList={purchaseList}
                 purchaseDispatch={purchaseListDispatch} />

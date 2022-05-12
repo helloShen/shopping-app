@@ -14,7 +14,7 @@ const Home: React.FC = ({}) => {
           <div>Material UI</div>
         </div>
       </div>
-      <Link to="/shopping-app/#/shopping">
+      <Link to="/shopping-app/shopping">
         <Card className="home__logo-card">
           <CardActionArea>
             <div className="home__logo">
