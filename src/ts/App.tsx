@@ -7,6 +7,7 @@ import Cart from './Cart';
 import Product from './Product';
 import {purchaseListReducer} from './Purchase';
 import {ThemeProvider, createTheme} from '@mui/material/styles';
+import Footer from '../js/footer/footer';
 
 const theme = createTheme({
   palette: {
@@ -70,6 +71,10 @@ const App: React.FC = () => {
                 purchaseDispatch={purchaseListDispatch} />
             } />
           </Routes>
+          <Footer
+            sourceCode="https://github.com/helloShen/#"
+            githubLogo="black"
+          />
         </Router>
       </div>
     </ThemeProvider>

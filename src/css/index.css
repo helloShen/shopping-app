@@ -119,7 +119,7 @@
 
 .home {
   width: 100%;
-  height: calc(100vh - 3rem);
+  height: calc(100vh - 8rem);
   display: grid;
   grid-template-columns: auto auto;
   align-items: center;
