@@ -51,12 +51,11 @@ const App: React.FC = () => {
       <div
         className="app"
       >
-        <Router basename={`/${process.env.PUBLIC_URL}`}>
-        {/* <Router> */}
+        <Router>
           <Nav purchaseList={purchaseList} />
           <Routes>
             <Route path="" element={<Home />} />
-            <Route path="/" element={<Home />} />
+            {/* <Route path="/" element={<Home />} /> */}
             <Route path="/index.html" element={<Home />} />
             <Route path="/home" element={<Home />} />
             <Route
