@@ -51,7 +51,7 @@ const App: React.FC = () => {
         className="app"
       >
         <Router>
-          <Nav />
+          <Nav purchaseList={purchaseList} />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />

@@ -16,7 +16,6 @@ const Shopping: React.FC<ShoppingProps> =
   (<CircularProgress />) :
   (
     <div className="shopping">
-      <h1>Shopping</h1>
       <Grid
         container
         spacing={{xs: 2, md: 4}}
