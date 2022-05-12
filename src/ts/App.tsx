@@ -54,6 +54,7 @@ const App: React.FC = () => {
         <Router>
           <Nav purchaseList={purchaseList} />
           <Routes>
+            <Route path="/" element={<Home />} />
             <Route path="/shopping-app" element={<Home />} />
             <Route path="/shopping-app/home" element={<Home />} />
             <Route

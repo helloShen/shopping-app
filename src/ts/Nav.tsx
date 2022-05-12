@@ -11,16 +11,16 @@ const Nav: React.FC<NavProps> = ({purchaseList}) => {
     <nav className="nav">
       <div className="nav__logo">ShoppingApp</div>
       <ul className="btns">
-        <Link to="/shopping-app/home">
+        <Link to="/shopping-app/#/home">
           <li className="btn nav__home">Home</li>
         </Link>
-        <Link to="/shopping-app/shopping">
+        <Link to="/shopping-app/#/shopping">
           <li className="btn nav__shopping">
             Shopping
           </li>
         </Link>
       </ul>
-      <Link to="/shopping-app/cart">
+      <Link to="/shopping-app/#/cart">
         <div className="nav__cart">
           <i className="cart__icon material-icons">shopping_cart</i>
           {(purchaseList.length > 0) ?
